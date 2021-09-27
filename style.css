@@ -38,6 +38,10 @@ img {
 
   /* fonts */
   --title-font-size: 1.875rem;
+  --subtile-font-size: 1rem;
+
+  --title-font: "Poppins", sans-serif;
+  --body-font: "DM Sans", sans-serif;
 }
 
 /******************* Base *******************/
@@ -45,14 +49,14 @@ html {
   scroll-behavior: smooth;
 }
 body {
-  font: 400 1rem "DM Sans", sans-serif;
+  font: 400 1rem var(--body-font);
   color: var(--text-color);
   background: var(--body-color);
   -webkit-font-smoothing: antialiased;
 }
 
 .title {
-  font: 700 var(--title-font-size) "Poppins", sans-serif;
+  font: 700 var(--title-font-size) var(--title-font);
   color: var(--title-color);
   -webkit-font-smoothing: auto;
 }
@@ -70,7 +74,7 @@ body {
   padding: 0 2rem;
   border-radius: 0.25rem;
 
-  font: 500 1rem "DM Sans", sans-serif;
+  font: 500 1rem var(--body-font);
 
   transition: background 0.3s;
 }
@@ -108,7 +112,11 @@ body {
 }
 
 .section {
-  padding: 5rem 0;
+  padding: calc(5rem + var(--header-height)) 0;
+}
+
+.section.subtitle{
+  font-size: var(--subtile-font-size);
 }
 
 .section .title {
@@ -157,13 +165,9 @@ body {
   color: white;
 }
 
-main {
-  margin-top: calc(var(--header-height) + 2rem);
-}
-
 /******************* Logo *******************/
 .logo {
-  font: 700 1.31rem "Poppins", sans-serif;
+  font: 700 1.31rem var(--title-font);
   color: var(--title-color);
 }
 
@@ -196,8 +200,10 @@ nav ul li a {
 }
 nav ul li a:hover {
   color: var(--base-color);
+  font-weight: bold;
 }
-nav ul li a::after {
+
+nav ul li a::after{
   content: "";
 
   width: 0%;
@@ -503,6 +509,10 @@ footer {
   background: var(--base-color);
 }
 
+footer.section{
+  padding: 4rem 0;
+}
+
 footer .logo {
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -517,19 +527,23 @@ footer i {
   font-size: 1.5rem;
   color: var(--text-color-light);
 }
-/* deixa menos poluido, deixando dividindo as tags com o gap*/
+/* deixa menos poluido, deixando dividindo as tags com o gap
 footer .social {
   display: flex;
   gap: 2rem;
-}
+}*/
 /*footer .social a {
   Margin coloca em todos as tag, ou seja o último vai ficar também, "poluindo" o site 
   margin-right: 2rem;
 }*/
 
+footer .social{
+  grid-auto-flow: column;
+  width: fit-content;
+}
+
 footer .social a {
   transition: 0.3s;
-
   display: inline-block;
 }
 footer .social a:hover {
@@ -569,13 +583,146 @@ footer .social a:hover {
 
 /******************* Responsivo *******************/
 /* extra large devices: 1200 > */
-@media (min-width: 1200) {
+@media (min-width: 1200px) {
+  /*******************  reusable classes  *******************/
+  .container{
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section{
+    padding: 10rem 0;
+  }
+
+  .section header,
+  #testimonials header{
+    max-width: 32rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .button{
+    height: 3.125rem;
+  }
+
+  /*******************  Navigation  *******************/
+  nav .menu{
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+  }
+
+  nav .menu ul{
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav .menu ul li a.title{
+    font: 400 1rem var(--body-font);
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  nav .icon-menu{
+    display: none;
+  }
+
+  nav ul li a.active::after {
+    width: 100%;
+  }
+  nav .menu ul li a.active {
+    color: var(--base-color);
+    font-weight: bold;
+    -webkit-font-smoothing: auto;
+  }
+
+  #header.scroll nav ul li a:hover {
+    color: white;
+  }
+  #header.scroll nav ul li a::after {
+    background: white;
+  }
+  #header.scroll nav ul li a.active {
+    color: white;
+  }
+  
+  
+  /*******************  Layout  *******************/
+  main {
+    margin-top: var(--header-height);
+  }
+
+  /******************* Home  *******************/
+  #home .container{
+    grid-auto-flow: column;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
+  #home .image{
+    order: 1;
+  }
+
+  #home .text{
+    order: 0;
+    max-width: 24rem;
+    text-align: left;
+  }
+
+  /*******************  About  *******************/
+  #about .container{
+    margin: 0 auto;
+    grid-auto-flow: column;
+  }
+
+  /*******************  Services  *******************/
+  .cards{
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .card{
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  /*******************  Testimonials  *******************/
+  #testimonials .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /*******************  Contact  *******************/
+  #contact .container{
+    grid-auto-flow: column;
+    align-items: center;
+  }
+
+  #contact .text{
+    max-width: 25rem;
+  }
+
+  /*******************  Contact  *******************/
+  footer.section{
+    padding-right: 3.75rem 0;
+  } 
+  footer .container{
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .logo{
+    font-size: 2.25rem;
+  }
 }
+
 /* large devices: 1023 > */
 /* large devices: 992 > */
 @media (min-width: 992px) {
   :root {
     --title-font-size: 2.2rem;
+    --subtitle-font-size: 1.125rem;
   }
 }
 
