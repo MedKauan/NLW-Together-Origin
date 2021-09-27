@@ -686,6 +686,10 @@ footer .social a:hover {
     padding-right: 3rem;
   }
 
+  .card:hover {
+    transform: translateY(-8px) !important;
+  }
+
   /*******************  Testimonials  *******************/
   #testimonials .container {
     margin-left: auto;
